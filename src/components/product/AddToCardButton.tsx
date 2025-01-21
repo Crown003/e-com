@@ -11,6 +11,7 @@ type AddToCartButtonProps = {
     product: Product
 }
 const AddToCartButton = ({ product }: AddToCartButtonProps) => {
+
     const { cartId, addItem, open } = useCartStore(
         useShallow((state) => ({
             cartId: state.cartId,
@@ -38,19 +39,6 @@ const AddToCartButton = ({ product }: AddToCartButtonProps) => {
             quantity: 1,
         });
 
-        try {
-            const anyWindow = window as any;
-
-            if(anyWindow.umami) {
-                anyWindow.umami.track('add_to_cart', {
-                    cartId: cartId,
-                    productId: product._id,
-                    productName: product.title,
-                    price: product.price,
-                    currency: 'USD',
-                })
-            }
-        } catch(e) {}
 
         setLoading(false);
         open();

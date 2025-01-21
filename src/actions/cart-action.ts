@@ -1,4 +1,5 @@
 "use server";
+
 import { getCurrentSession } from "@/actions/auth";
 import prisma from "@/lib/prisma";
 import { Product } from "@/sanity.types";

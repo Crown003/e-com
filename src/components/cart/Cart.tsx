@@ -1,6 +1,5 @@
 'use client';
-
-// import { createCheckoutSession } from '@/actions/stripe-actions';
+import { createCheckoutSession } from '@/actions/stripe-actions';
 import { formatPrice } from '@/lib/utils';
 import { useCartStore, type CartItem as CartItemType } from '@/stores/cart-store';
 import { Loader2, ShoppingCart, X } from 'lucide-react';
@@ -102,30 +101,30 @@ const Cart = () => {
     }, []);
 
     const [loadingProceed, setLoadingProceed] = useState<boolean>(false);
-    // const handleProceedToCheckout = async () => {
-    //     if(!cartId || loadingProceed) {
-    //         return;
-    //     }
-    //     setLoadingProceed(true);
+    const handleProceedToCheckout = async () => {
+        if(!cartId || loadingProceed) {
+            return;
+        }
+        setLoadingProceed(true);
 
-    //     const checkoutUrl = await createCheckoutSession(cartId);
+        const checkoutUrl = await createCheckoutSession(cartId);
 
-    //     try {
-    //         const anyWindow = window as any;
+        try {
+            const anyWindow = window as any;
 
-    //         if(anyWindow.umami) {
-    //             anyWindow.umami.track('proceed_to_checkout', {
-    //                 cartId: cartId,
-    //                 totalPrice: getTotalPrice(),
-    //                 currency: 'USD',
-    //             })
-    //         }
-    //     } catch(e) {}
+            if(anyWindow.umami) {
+                anyWindow.umami.track('proceed_to_checkout', {
+                    cartId: cartId,
+                    totalPrice: getTotalPrice(),
+                    currency: 'INR',
+                })
+            }
+        } catch(e) {}
 
-    //     window.location.href = checkoutUrl;
+        window.location.href = checkoutUrl;
         
-    //     setLoadingProceed(false);
-    // }
+        setLoadingProceed(false);
+    }
 
     const totalPrice = getTotalPrice();
 
@@ -252,7 +251,7 @@ const Cart = () => {
 
                                     <button
                                         className='w-full bg-black text-white py-4 rounded-full font-bold hover:bg-gray-900 transition-colors flex items-center justify-center'
-                                        onClick= {handleProceedToCheckout}
+                                        onClick={handleProceedToCheckout}
                                         disabled={loadingProceed}
                                     >
                                         {loadingProceed ? (

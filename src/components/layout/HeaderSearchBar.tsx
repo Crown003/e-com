@@ -3,6 +3,7 @@ import React from 'react';
 
 const HeaderSearchBar = () => {
     return (
+        <div>
         <Form action='/search'>
             <div className='relative'>
                 <div className='absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none'>
@@ -18,6 +19,7 @@ const HeaderSearchBar = () => {
                 />
             </div>
         </Form>
+        </div>
     );
 };
 
