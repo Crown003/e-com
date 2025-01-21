@@ -116,7 +116,7 @@ const Cart = () => {
                 anyWindow.umami.track('proceed_to_checkout', {
                     cartId: cartId,
                     totalPrice: getTotalPrice(),
-                    currency: 'INR',
+                    currency: 'USD',
                 })
             }
         } catch(e) {}

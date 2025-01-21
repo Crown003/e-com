@@ -24,7 +24,7 @@ export const createCheckoutSession = async (cartId: string) => {
         mode: 'payment',
         line_items: cart.items.map((item) => ({
             price_data: {
-                currency: 'inr',
+                currency: 'usd',
                 product_data: {
                     name: item.title,
                     images: [item.image]
@@ -41,14 +41,14 @@ export const createCheckoutSession = async (cartId: string) => {
             userId: user?.id?.toString() || '-'
         },
         shipping_address_collection: {
-            allowed_countries: ['IN']
+            allowed_countries: ['US']
         },
         shipping_options: [
             {
                 shipping_rate_data: {
                     type: 'fixed_amount',
                     fixed_amount: {
-                        currency: 'inr',
+                        currency: 'usd',
                         amount: totalPrice >= 15 ? 0 : 5 * 100 // $5.00 USD
                     },
                     display_name: totalPrice >= 15 ? 'Free Shipping' : 'Shipping',
